@@ -2,5 +2,8 @@
 
 ## team members
 
-#### -Mariam almadani
-#### -hala alqahtani
+#### -Mariam ALmadani
+#### -Hala Alqahtani
+## About us 
+
+#### We are saudi falcons and we're part of the future engineers contestants
