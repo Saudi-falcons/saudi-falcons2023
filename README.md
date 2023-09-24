@@ -15,9 +15,7 @@ We carefully built our code by scrutinizing each and every line of code to ensur
 ## YouTube channel link :-
 #### https://youtube.com/@Saudifalcons2023?feature=shared
 ## Social accounts:-
-#### -Email/saudifalcons71@gmail.com
-#### -Instagram/ https://www.instagram.com/saudi_falcons71/?utm_source=qr
-#### -TikTok/https://www.tiktok.com/@saudifalcons?_t=8fhputt7gRa&_r=1
+#### https://linktr.ee/saudifalcons
 
 ## team members:-
 
