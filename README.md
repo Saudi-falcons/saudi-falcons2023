@@ -7,45 +7,44 @@ Finding a means to make all of these components work together nicely without int
 We’re working with a vehicle that is built with Three ultrasonic sensors for measuring distance from three directions ,a color sensor to detect the colors on the mattress , an artificial intelligence camera with multiple programs, color and object recognition , an interactive screen for displaying the camera view, a servo motor for steering to control the direction of the robot,a differential mechanism to transfer power from one motor to two wheels ,a lightweight aluminum body ,a 12V rechargeable lithium battery, a board compatible with Arduino,a separate motor drive control , Motors with a speed of 300 rpm , Wide rubber wheel .
 
 We carefully built our code by scrutinizing each and every line of code to ensure that no errors or software bugs were present. By preparing two codes, we ensured that each problem isn't decided by chance but rather by our prior planning.
+
 ## Ultrasonic sensor US - 100 :
 •	An ultrasonic sensor is an instrument that measures the distance to an object which is the walls or either the pillars using ultrasonic sound waves. An ultrasonic sensor uses a transducer to send and receive ultrasonic pulses that relay back information about an object's proximity. We used 3 ultrasonic front, right and left
 
 
 
 
-RNAI Arduino Mega 2560 :
+##RNAI Arduino Mega 2560 :
 •	A microcontroller board based on the ATmega2560 is called the Arduino Mega 2560. It contains 16 analog inputs, 4 UARTs (hardware serial ports), a 16 MHz crystal oscillator, 54 digital input/output pins (of which 15 can be utilized as PWM outputs), a USB connector, a power jack, an ICSP header, and a reset button.
 
 
 
-Servo MG995 :
+##Servo MG995 :
 •	The MG995 Metal Gear Servo Motor is a high-speed standard servo that is used in many RC models, airplanes, helicopters, and cars. It can rotate about 180 degrees (60 in each direction). delivers 12 kg/cm at 6 V and 10 kg/cm at 4.8 V. It is a digital servo motor that has improved and faster PWM signal reception and processing.
 
 
 
-Dc Motor 12V 1200RPM :
+##Dc Motor 12V 1200RPM :
 •	The most prevalent kind of motor is a DC (Direct Current) motor. Typically, DC motors consist of a single positive and a single negative lead. The motor will turn on if you connect these two lines straight to a battery. The motor will rotate in the other direction if the leads are switched.
 
 
 
 
-HuskyLens AI Camera :
+##HuskyLens AI Camera :
 •	Huskylens is an AI Camera that is equipped with multiple functions, such as face recognition, object tracking, object recognition, line tracking, color recognition, and tag(QR code) recognition. Huskylens is pretty easy-to-use AI Camera. You can change various algorithms by pressing the function button. Click the learning button, Husky lens starts learning new things. After that, HuskyLens is able to recognize them. We use it to identify the pillars colors between red and green and to identify the lines on the mat between blue and orange.
 
 
 
-The L298N Motor Driver :
+##The L298N Motor Driver :
 •	The L298N is a dual H-Bridge motor driver that can control the speed and direction of two DC motors at the same time. The module can power DC motors with voltages ranging from 5 to 35V and peak currents of up to 2A. 
 
 
 
-
-Batteries :
+##Batteries :
 •	 We used ( 6 ) 12-volt batteries
 
 
-
-Pixy2 Camera :
+##Pixy2 Camera :
 
 •	A computer-aided visual recognition system is used in the Pixy2 camera. It enables your microcontroller to detect colors or lines, for example, to build a line-following robot or to catch colored objects. The Pixy2 camera is a full vision system that includes an image sensor and a microprocessor. It includes color, line, intersection, and small barcode detection algorithms as well as learning algorithms. It contains all of the technology required for visual recognition and for our strategy we use the Pixy cam to identify the red and green pillars and follow what each color do
 
