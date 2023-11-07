@@ -2,6 +2,7 @@
 #include <RN.h>
 #include "HUSKYLENS.h"
 #include <Pixy2.h>
+#define switchPin A1
 Pixy2 pixy;
 HUSKYLENS huskylens;
 RN sensor(14, 15);   // Right
@@ -54,6 +55,10 @@ void setup() {
         delay(100);
     }
     delay(1500);
+pinMode(switchPin, INPUT_PULLUP);
+  while(digitalRead(switchPin) == 1);
+  delay(50);
+  while(digitalRead(switchPin) == 0);
 }
 
 void loop() {
