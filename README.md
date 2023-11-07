@@ -30,11 +30,6 @@ We carefully built our code by scrutinizing each and every line of code to ensur
 
 
 
-## HuskyLens AI Camera :
-•	Huskylens is an AI Camera that is equipped with multiple functions, such as face recognition, object tracking, object recognition, line tracking, color recognition, and tag(QR code) recognition. Huskylens is pretty easy-to-use AI Camera. You can change various algorithms by pressing the function button. Click the learning button, Husky lens starts learning new things. After that, HuskyLens is able to recognize them. We use it to identify the pillars colors between red and green and to identify the lines on the mat between blue and orange.
-
-
-
 ## The L298N Motor Driver :
 •	The L298N is a dual H-Bridge motor driver that can control the speed and direction of two DC motors at the same time. The module can power DC motors with voltages ranging from 5 to 35V and peak currents of up to 2A. 
 
