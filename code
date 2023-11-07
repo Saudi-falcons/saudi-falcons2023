@@ -1,0 +1,765 @@
+
+#include <RN.h>
+#include "HUSKYLENS.h"
+#include <Pixy2.h>
+Pixy2 pixy;
+HUSKYLENS huskylens;
+RN sensor(14, 15);   // Right
+RN sensor1(16, 17);  // front
+RN sensor2(18, 19);  //left
+const int S0 = 3;
+const int S1 = 4;
+const int S2 = 5;
+const int S3 = 6;
+const int sensorOut = 7;
+// Create an instance of the RN library
+RN colorSensor(S0, S1, S2, S3, sensorOut);
+const int servoPin = 2;
+// Create an instance of the RN library
+RN servoController(servoPin);
+///dc motor
+RN motor(8, 9, 10);
+char tleft='left';
+char tright='right';
+int x,count,id,yaxis,stRight,safe,safe1 ,lang,f,t1,t2,t3,t4,idpixy,blue=0;
+float right = 0; 
+float front = 0;
+float left = 0;
+
+float stLeft=0;
+bool ang,c,d,ps,o,i,v,caseBlk,control,a,control1,control2,control3,control4,controlx2,controlx5,controlx4=0;
+unsigned long t, cr, cg,wa ,counter,saf= 0;
+int mask=500;
+/*
+ID for hus 
+id1 is blue         
+ id2 is orange
+ ,,,,,,,,,,,,,,,,,,,,,,,,,
+ID for pixy
+id1 is green 
+id2 is red
+*/
+void setup() {
+  servoController.Servobegin();
+ Serial.begin(115200);
+    Wire.begin();
+     colorSensor.begin(); 
+     pixy.init();
+     Serial.print("Starting...\n");
+    while (!huskylens.begin(Wire))
+    {
+        Serial.println(F("Begin failed!"));
+        Serial.println(F("1.Please recheck the \"Protocol Type\" in HUSKYLENS (General Settings>>Protocol Type>>I2C)"));
+        Serial.println(F("2.Please recheck the connection."));
+        delay(100);
+    }
+    delay(1500);
+}
+
+void loop() {
+  if(ps==0){
+     if(d==0){
+ servoController.setServoPosition(67);
+
+  } 
+    motor.setMotorDirection(1);  // rotate the motor in one direction
+ motor.setMotorSpeed(180);
+  right = sensor.getDistance(); 
+ front = sensor1.getDistance();
+ left = sensor2.getDistance();
+ if(count==safe || count>safe || count==safe1 || count>safe1 ){
+  pixy.ccc.getBlocks();
+  if (pixy.ccc.numBlocks)
+  {  
+      idpixy= pixy.ccc.blocks[i].m_signature;
+   
+if(idpixy==1){// Idpixy 1 is Green Blocks
+     if(count==safe || count>safe){
+           
+           left = sensor2.getDistance();
+           front = sensor1.getDistance();
+           right = sensor.getDistance(); 
+           stRight=left;
+           stLeft=right;
+
+      if(left<=40&&left>15&&caseBlk==0){
+      if(left<=24){
+       servoController.setServoPosition(55);
+       delay(300); 
+       control2=1;
+       mask=400;
+       lang=75;
+        caseBlk=1;
+        wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     safe=count+1;
+     }
+     else if(left>24&&left<=30){
+             servoController.setServoPosition(50);
+             delay(500);
+             control2=1; 
+       mask=400;
+       lang=74;
+        caseBlk=1;
+        wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     safe=count+1;
+     }
+    else if(left>30){
+           control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(700); 
+      servoController.setServoPosition(74);
+      delay(300);
+      servoController.setServoPosition(85);  
+   
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+    }
+    }
+
+         else if(left>40){
+       if(right>=30){
+       if(yaxis<=50){
+        control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(800); 
+      servoController.setServoPosition(74);
+      delay(400);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+  control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(850); 
+      servoController.setServoPosition(74);
+      delay(650);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+       else if(right<30 && right>20){
+if(yaxis<=50){
+      control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(900); 
+      servoController.setServoPosition(74);
+      delay(900);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+       control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(900); 
+      servoController.setServoPosition(74);
+      delay(1000);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+       else if(right<20){
+       if(yaxis<=50){
+            control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(900); 
+      servoController.setServoPosition(74);
+      delay(1000);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+           control2=1;
+    safe=count+1;
+     servoController.setServoPosition(45); 
+     delay(1000); 
+      servoController.setServoPosition(74);
+      delay(900);
+      servoController.setServoPosition(85);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+     }
+     }
+  caseBlk=0;
+
+
+
+
+
+
+
+}
+else if(idpixy==2){//Red Block
+     if(count==safe1 || count>safe1){
+           
+           left = sensor2.getDistance();
+           front = sensor1.getDistance();
+           right = sensor.getDistance(); 
+           stRight=left;
+           stLeft=right;
+
+      if(right<=40&&right>15&&caseBlk==0){
+      if(right<=30){
+       servoController.setServoPosition(85);
+       delay(300); 
+       servoController.setServoPosition(70);
+       control1=1;
+       mask=300;
+       lang=75;
+        caseBlk=1;
+        wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     safe1=count+1;
+     }
+
+    else if(right>30){
+           control2=1;
+    safe=count+1;
+     servoController.setServoPosition(90); 
+     delay(700); 
+      servoController.setServoPosition(65);
+      delay(300);
+      servoController.setServoPosition(55);  
+   
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+    }
+    }
+
+         else if(right>40){
+       if(left>=30){
+       if(yaxis<=50){
+        control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(90); 
+     delay(800); 
+      servoController.setServoPosition(65);
+      delay(400);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+  control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(90); 
+     delay(850); 
+      servoController.setServoPosition(65);
+      delay(650);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+       else if(left<30 && left>20){
+if(yaxis<=50){
+      control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(95); 
+     delay(900); 
+      servoController.setServoPosition(65);
+      delay(900);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+       control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(95); 
+     delay(900); 
+      servoController.setServoPosition(65);
+      delay(1000);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+       else if(left<20){
+       if(yaxis<=50){
+            control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(95); 
+     delay(900); 
+      servoController.setServoPosition(65);
+      delay(1000);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+             else  if(yaxis>50){
+           control2=1;
+    safe1=count+1;
+     servoController.setServoPosition(95); 
+     delay(1000); 
+      servoController.setServoPosition(65);
+      delay(900);
+      servoController.setServoPosition(55);  
+     
+     wa=millis(); 
+     f=2;
+     d=1; 
+     a=1;
+     //v=1;
+     caseBlk=1;
+        }
+       }
+     }
+     }
+  caseBlk=0;
+
+
+
+
+
+
+
+}
+
+}
+  }
+ 
+
+
+
+ 
+
+if (huskylens.request())
+{
+if(huskylens.isLearned()&&huskylens.available()){
+
+ HUSKYLENSResult result = huskylens.read();
+id=result.ID;
+
+if(position==0){
+if(id==1){   // blue start
+  position=1;
+  t1=45; t2=60; t3=55; t4=70; tleft='left'; tright='right';
+}
+else if(id==2){      //orange start
+  position=1;
+t1=95; t2=80; t3=85; t4=70; tleft='right'; tright='left';
+}
+
+}
+yaxis=result.yCenter;
+
+else if(id==1 && o==0 ){counter=millis(); i=1;  o=1; cr=0;  }
+else if(id==1&&cr==0){
+  count=count+1; 
+ tright = sensor.getDistance(); 
+ front = sensor1.getDistance();
+   t = millis();
+   mask=1000;
+   cr=1;
+   blue=0; 
+  if(tright<=25&&c==0){ 
+                 cg=millis();
+                 c=1;
+                 x=2;
+                 
+               }
+   else       if(tleft<25&&c==0){ c=1; x=4; ang=0; }
+    else{ 
+
+      x=5;
+      while(x==5){
+        if(c==0){
+          servoController.setServoPosition(t1);
+    
+  if (huskylens.request())
+{
+if(huskylens.isLearned()&&huskylens.available()){
+
+ HUSKYLENSResult result = huskylens.read();
+id=result.ID;
+   if(id==2){
+          
+           wa=millis();
+           mask=700;
+           f=1; 
+           d=1;
+           x=0;
+        c=1;
+        controlx5=1;
+   }
+   }
+   }
+
+       else if(millis()-cg>400 )
+           {
+            servoController.setServoPosition(t2); 
+           wa=millis();
+           f=1; 
+           d=1;
+           x=0;
+           mask=700;
+           controlx5=1;
+           }
+     
+      }
+      }
+      }
+
+  while(x==2){
+             
+              servoController.setServoPosition(t1);
+              
+              
+             
+       
+      // servoController.setServoPosition(47);  // Adjust the value as desired
+        front = sensor1.getDistance();
+        left = sensor2.getDistance();
+        right = sensor.getDistance();
+        if (huskylens.request())
+{
+if(huskylens.isLearned()&&huskylens.available()){
+
+ HUSKYLENSResult result = huskylens.read();
+id=result.ID;
+        if(id==2){ 
+          x=0;
+          servoController.setServoPosition(t3);
+          wa=millis();
+          f=1; 
+          d=1;
+          mask=800;
+          controlx2=1;
+        }}}
+       
+         else if(millis()-cg>500 ){
+        
+                 servoController.setServoPosition(t3); 
+                mask=800;
+                    wa=millis();
+                    f=1; 
+                    d=1;
+                    controlx2=1;
+                        }
+                        }
+                    
+                    
+
+                 
+  
+    while(x==4){
+                servoController.setServoPosition(t1); 
+                  
+                 left = sensor2.getDistance();
+                  right = sensor.getDistance(); 
+                if (huskylens.request())
+{
+if(huskylens.isLearned()&&huskylens.available()){
+
+ HUSKYLENSResult result = huskylens.read();
+id=result.ID;
+   if(id==2||millis()-cg>500){
+                     x=0;
+                     ang=0; 
+                    mask=800;
+                     wa=millis();
+                     f=1; 
+                     d=1;
+                     controlx4=1;
+   }}}
+                      }
+
+                 }
+}}
+
+           if(left<15){ 
+            if(f==0){wa=millis(); f=1; d=1; mask=400; }
+            servoController.setServoPosition(80); 
+                   if(left<9)servoController.setServoPosition(90); 
+                   control3=0;
+                   control=0;
+                   control2=0;
+                   
+                   c=0;
+                   
+             }
+        else if(right<15){
+          if(f==0){wa=millis(); f=1;  d=1; mask=500;}
+          if(v==0){
+          servoController.setServoPosition(58);  
+          if(right<9)servoController.setServoPosition(55);}
+          if(v==1){  servoController.setServoPosition(73);
+           v==0;
+           mask=300;
+           wa=millis();
+               f=1;  
+               d=1;    }
+                   control3=0;
+                   c=0;
+                   control2=0;
+                   control1=0;
+          }
+           else if(front<20){
+          if(f==0){wa=millis(); f=1;  d=1; mask=300;}
+          if(tright<tleft){
+          if(tright>20){
+          servoController.setServoPosition(t1); } 
+         servoController.setServoPosition(t3);
+          wa=millis();
+               f=1;  
+               d=1;
+          }
+          }
+          /* else if(front<20){
+          if(f==0){wa=millis(); f=1;  d=1; mask=300;}
+          if(right<left){
+          if(left>20){
+          servoController.setServoPosition(90); } 
+         servoController.setServoPosition(85);
+          wa=millis();
+               f=1;  
+               d=1;
+          }}*/
+        else if(f==1&& millis() - wa >mask){
+          if(count==12){ps=1;  motor.stopMotor();}
+         d=0; 
+         f=0;
+         }
+         else if(i==1 && millis()-counter>400){i=0;  o=0;}
+          else if(control1==1){
+            
+                     front = sensor1.getDistance();
+                      right = sensor.getDistance();
+                      left = sensor2.getDistance();
+                      if(right<13){
+                         servoController.setServoPosition(65);
+                          wa=millis();
+                          mask=500; 
+                          f=1;  
+                          d=1;
+                          control1=0; 
+                      }
+                else if(front<13){
+                         servoController.setServoPosition(60);
+                          wa=millis();
+                          mask=500; 
+                          f=1;  
+                          d=1;
+                          control1=0; 
+                }
+                 else if( millis() - wa >600){
+                         servoController.setServoPosition(65);
+                          wa=millis();
+                          mask=500; 
+                          f=1;  
+                          d=1;
+                          control1=0; 
+                }               
+                
+
+         
+         }
+          else if(control2==1 && millis()-wa>50){
+                     front = sensor1.getDistance();
+                     if(left<15 ){
+              servoController.setServoPosition(74);
+              mask=300; 
+              wa=millis();
+               f=1;  
+               d=1;
+               control2=0; }
+               else if(front<15){
+               servoController.setServoPosition(80);
+              mask=400; 
+              wa=millis();
+               f=1;  
+               d=1;
+               control2=0; }
+               else if(millis()-wa>500){
+              servoController.setServoPosition(74);
+              mask=300; 
+              wa=millis();
+              f=1;  
+              d=1;
+              control2=0; }
+            
+
+         }
+         else if(control3==1 && millis()-wa>mask){
+
+              servoController.setServoPosition(lang);
+               
+              wa=millis();
+               f=1;  
+               d=1;
+               control3=0; }
+
+         
+                   else if(controlx2==1 && millis()-wa>300){
+                     front = sensor1.getDistance();
+                            left = sensor2.getDistance();
+                             right = sensor.getDistance();
+                             if(tright>27){
+              servoController.setServoPosition(t4); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx2=0; }
+               else if(tright<10){
+              servoController.setServoPosition(t1); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx2=0; }
+                              else if(tright<10){
+              servoController.setServoPosition(t1); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx2=0; }
+
+         }
+                   else if(controlx5==1 && millis()-wa>300){
+                           front = sensor1.getDistance();
+                            left = sensor2.getDistance();
+                             right = sensor.getDistance();
+                             if(tright<25){
+              servoController.setServoPosition(t3); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx5=0;
+               if(count==12){ps=1;  motor.stopMotor();}
+               }
+                    else   if(tleft>30&&tleft<40){
+              servoController.setServoPosition(t2); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx5=0; 
+               if(count==12){ps=1;  motor.stopMotor();}
+               }
+                                   else   if(front<15){
+              servoController.setServoPosition(t1); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx5=0; 
+               if(count==12){ps=1;  motor.stopMotor();}
+               }
+
+         }
+                   else if(controlx4==1 && millis()-wa>300){//errors case left<25
+                            front = sensor1.getDistance();
+                            left = sensor2.getDistance();
+                           right = sensor.getDistance();
+                           if(tleft>30){
+              servoController.setServoPosition(t1); 
+              wa=millis();
+               mask=400; 
+               f=1;  
+               d=1;
+               c=0;
+               controlx4=0; 
+               if(count==12){ps=1;  motor.stopMotor();}
+               }
+
+         }
+
+
+
+}
+
+if(count==13){ps=1;  motor.stopMotor();}
+}
